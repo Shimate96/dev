@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HistoryScreen from '../screens/HistoryScreen';
+import { HistoryScreen } from '../screens/HistoryScreen';
 import { defaultStackOptions } from './screenOptions';
 
 const Stack = createNativeStackNavigator();

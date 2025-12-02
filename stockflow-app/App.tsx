@@ -35,7 +35,7 @@ export default function App() {
   return (
     <InventoryProvider>
       <NavigationContainer>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar style="dark" />
         <DrawerNavigator />
       </NavigationContainer>
     </InventoryProvider>

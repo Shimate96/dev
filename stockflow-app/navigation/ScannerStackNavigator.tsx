@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ScannerScreen from '../screens/ScannerScreen';
+import { ScannerScreen } from '../screens/ScannerScreen';
 import { defaultStackOptions } from './screenOptions';
 
 const Stack = createNativeStackNavigator();

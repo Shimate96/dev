@@ -1,8 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CategoriesScreen from '../screens/CategoriesScreen';
-import CategoryItemsScreen from '../screens/CategoryItemsScreen';
-import AddEditCategoryScreen from '../screens/AddEditCategoryScreen';
+import { CategoriesScreen } from '../screens/CategoriesScreen';
+import { CategoryItemsScreen } from '../screens/CategoryItemsScreen';
+import { AddEditCategoryScreen } from '../screens/AddEditCategoryScreen';
 import { defaultStackOptions } from './screenOptions';
 
 const Stack = createNativeStackNavigator();

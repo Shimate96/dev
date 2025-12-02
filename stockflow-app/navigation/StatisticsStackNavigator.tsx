@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import StatisticsScreen from '../screens/StatisticsScreen';
+import { StatisticsScreen } from '../screens/StatisticsScreen';
 import { defaultStackOptions } from './screenOptions';
 
 const Stack = createNativeStackNavigator();

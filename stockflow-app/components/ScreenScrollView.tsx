@@ -17,24 +17,3 @@ const styles = StyleSheet.create({
 });
 
 export default ScreenScrollView;
-import React from 'react';
-import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
-
-interface ScreenScrollViewProps {
-  children: React.ReactNode;
-  style?: any;
-}
-
-export const ScreenScrollView: React.FC<ScreenScrollViewProps> = ({ children, style }) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={style}>{children}</ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

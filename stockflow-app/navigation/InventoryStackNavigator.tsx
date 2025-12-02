@@ -1,10 +1,10 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import InventoryScreen from '../screens/InventoryScreen';
-import ItemDetailScreen from '../screens/ItemDetailScreen';
-import AddEditItemScreen from '../screens/AddEditItemScreen';
-import ScannerScreen from '../screens/ScannerScreen';
-import AdjustStockScreen from '../screens/AdjustStockScreen';
+import { InventoryScreen } from '../screens/InventoryScreen';
+import { ItemDetailScreen } from '../screens/ItemDetailScreen';
+import { AddEditItemScreen } from '../screens/AddEditItemScreen';
+import { ScannerScreen } from '../screens/ScannerScreen';
+import { AdjustStockScreen } from '../screens/AdjustStockScreen';
 import { defaultStackOptions } from './screenOptions';
 
 const Stack = createNativeStackNavigator();
