@@ -1,0 +1,29 @@
+{
+  "name": "stockflow-app",
+  "slug": "stockflow-app",
+  "version": "1.0.0",
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "ios": {
+    "supportsTabletMode": true
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/images/icon.png",
+      "backgroundColor": "#ffffff"
+    },
+    "package": "com.stockflow.app"
+  },
+  "web": {
+    "favicon": "./assets/images/icon.png"
+  },
+  "plugins": [
+    [
+      "expo-camera",
+      {
+        "cameraPermission": "Allow StockFlow to access your camera"
+      }
+    ]
+  ]
+}
