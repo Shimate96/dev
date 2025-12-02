@@ -1,10 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 
+interface CategoryItem {
+  id: string;
+  name: string;
+  quantity: number;
+}
+
 export const CategoryItemsScreen: React.FC<any> = ({ route }) => {
   const { categoryId } = route.params || {};
 
-  const renderItem = ({ item }: any) => (
+  const renderItem = ({ item }: { item: CategoryItem }) => (
     <View style={styles.itemCard}>
       <Text style={styles.itemName}>{item.name}</Text>
       <Text style={styles.itemQty}>Qty: {item.quantity}</Text>
@@ -13,7 +19,7 @@ export const CategoryItemsScreen: React.FC<any> = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={[]} renderItem={renderItem} keyExtractor={item => item.id} />
+      <FlatList<CategoryItem> data={[]} renderItem={renderItem} keyExtractor={item => item.id} />
     </View>
   );
 };
