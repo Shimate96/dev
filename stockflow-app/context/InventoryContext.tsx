@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 import { AppState, InventoryItem, Category, Event, Alert, Notification, AdjustmentHistory } from '../types/inventory';
+import notifications from '../utils/notifications';
 
 interface InventoryContextType extends AppState {
   addItem: (item: InventoryItem) => void;
@@ -35,17 +36,61 @@ export const InventoryProvider: React.FC<{ children: ReactNode }> = ({ children 
   });
 
   const addItem = useCallback((item: InventoryItem) => {
-    setState(prev => ({
-      ...prev,
-      items: [...prev.items, item],
-    }));
+    setState(prev => {
+      const next: AppState = {
+        ...prev,
+        items: [...prev.items, item],
+      };
+
+      if (item.quantity < item.minStock) {
+        // schedule notification (best-effort)
+        notifications.scheduleLowStockNotification(item.name, item.quantity).catch(() => {});
+        next.alerts = [
+          ...next.alerts,
+          {
+            id: Date.now().toString(),
+            itemId: item.id,
+            type: 'LOW_STOCK',
+            message: `Low stock: ${item.name} (${item.quantity})`,
+            read: false,
+            createdAt: new Date(),
+          },
+        ];
+      }
+
+      return next;
+    });
   }, []);
 
   const updateItem = useCallback((id: string, updates: Partial<InventoryItem>) => {
-    setState(prev => ({
-      ...prev,
-      items: prev.items.map(item => item.id === id ? { ...item, ...updates } : item),
-    }));
+    setState(prev => {
+      const items = prev.items.map(item => (item.id === id ? { ...item, ...updates } : item));
+      const updatedItem = items.find(i => i.id === id);
+      const prevItem = prev.items.find(i => i.id === id);
+
+      const next: AppState = { ...prev, items };
+
+      if (updatedItem) {
+        const wasLow = prevItem ? prevItem.quantity < prevItem.minStock : false;
+        const isLow = updatedItem.quantity < updatedItem.minStock;
+        if (isLow && !wasLow) {
+          notifications.scheduleLowStockNotification(updatedItem.name, updatedItem.quantity).catch(() => {});
+          next.alerts = [
+            ...next.alerts,
+            {
+              id: Date.now().toString(),
+              itemId: updatedItem.id,
+              type: 'LOW_STOCK',
+              message: `Low stock: ${updatedItem.name} (${updatedItem.quantity})`,
+              read: false,
+              createdAt: new Date(),
+            },
+          ];
+        }
+      }
+
+      return next;
+    });
   }, []);
 
   const deleteItem = useCallback((id: string) => {
