@@ -1,29 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { InventoryScreen } from '../screens/InventoryScreen';
-import { DashboardScreen } from '../screens/DashboardScreen';
-import { SettingsScreen } from '../screens/SettingsScreen';
+import InventoryStackNavigator from './InventoryStackNavigator';
+import DashboardStackNavigator from './DashboardStackNavigator';
+import SettingsStackNavigator from './SettingsStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
 export const MainTabNavigator: React.FC<any> = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen 
-        name="Inventory" 
-        component={InventoryScreen}
-        options={{ title: 'Inventory' }}
-      />
-      <Tab.Screen 
-        name="Dashboard" 
-        component={DashboardScreen}
-        options={{ title: 'Dashboard' }}
-      />
-      <Tab.Screen 
-        name="Settings" 
-        component={SettingsScreen}
-        options={{ title: 'Settings' }}
-      />
+      <Tab.Screen name="InventoryTab" component={InventoryStackNavigator} options={{ title: 'Inventory', headerShown: false }} />
+      <Tab.Screen name="DashboardTab" component={DashboardStackNavigator} options={{ title: 'Dashboard', headerShown: false }} />
+      <Tab.Screen name="SettingsTab" component={SettingsStackNavigator} options={{ title: 'Settings', headerShown: false }} />
     </Tab.Navigator>
   );
 };
